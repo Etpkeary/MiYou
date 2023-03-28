@@ -57,7 +57,7 @@ class UserServiceTest {
     void testUpdateUser() {
         User user = new User();
         user.setUserId(3L);
-        user.setUserName("LOUTS02");
+        user.setUserName("LOUTS02//*-");
         user.setUserAccount("123");
         user.setUserAvatar("");
         user.setUserGender(0);

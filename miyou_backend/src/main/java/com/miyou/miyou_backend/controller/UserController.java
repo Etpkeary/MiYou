@@ -12,6 +12,7 @@ import com.miyou.miyou_backend.model.dto.user.*;
 import com.miyou.miyou_backend.model.entity.User;
 import com.miyou.miyou_backend.model.vo.UserVO;
 import com.miyou.miyou_backend.service.UserService;
+import com.miyou.miyou_backend.utlis.ThrowUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -91,8 +92,12 @@ public class UserController {
         return ResultUtils.success(result);
     }
 
+    // endregion
+
+    // region 用户更新，查看个人信息
+
     /**
-     * 获取当前登录用户
+     * 获取当前登录用户的个人信息
      *
      * @param request 请求体
      * @return 用户脱敏后的信息
@@ -105,9 +110,26 @@ public class UserController {
         return ResultUtils.success(userVO);
     }
 
-    // endregion
-
-    // region 用户更新，查看信息
+    /**
+     * 更新当前登录用户的个人信息
+     *
+     * @param userUpdateMyRequest 用户更新我的请求
+     * @param request 请求体
+     * @return true
+     */
+    @PostMapping("/update/my")
+    public BaseResponse<Boolean> updateMyUser(@RequestBody UserUpdateMyRequest userUpdateMyRequest, HttpServletRequest request) {
+        if (userUpdateMyRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        User loginUser = userService.getLoginUser(request);
+        User user = new User();
+        BeanUtils.copyProperties(userUpdateMyRequest, user);
+        user.setUserId(loginUser.getUserId());
+        boolean result = userService.updateById(user);
+        ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+        return ResultUtils.success(true);
+    }
 
     // endregion
 
@@ -119,7 +141,7 @@ public class UserController {
 
     // endregion
 
-    // region 增删改查（仅管理员）
+    // region 增删改查
 
     /**
      * 创建用户 （仅管理员）
@@ -144,7 +166,7 @@ public class UserController {
     }
 
     /**
-     * 删除用户 （仅管理员）
+     * 获取 id 删除用户（仅管理员）
      *
      * @author LINGLAN
      * @param deleteRequest 删除用户请求体
@@ -152,16 +174,16 @@ public class UserController {
      * @return 删除用户的id
      */
     @PostMapping("/delete")
-    public BaseResponse<Boolean> deleteUser(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
-        if (deleteRequest == null || deleteRequest.getId() <= 0) {
+    public BaseResponse<Boolean> getDeleteUserById(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
+        if (deleteRequest == null || deleteRequest.getUserId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        boolean deleteuserid = userService.removeById(deleteRequest.getId());
+        boolean deleteuserid = userService.removeById(deleteRequest.getUserId());
         return ResultUtils.success(deleteuserid);
     }
 
     /**
-     * 更新用户 （仅管理员）
+     * 获取 id 更新用户 （仅管理员）
      *
      * @author LINGLAN
      * @param userUpdateRequest 更新用户请求体
@@ -169,8 +191,8 @@ public class UserController {
      * @return 更新用户的id
      */
     @PostMapping("/update")
-    public BaseResponse<Boolean> updateUser(@RequestBody UserUpdateRequest userUpdateRequest, HttpServletRequest request) {
-        if (userUpdateRequest == null || userUpdateRequest.getId() == null) {
+    public BaseResponse<Boolean> getUpdateUser(@RequestBody UserUpdateRequest userUpdateRequest, HttpServletRequest request) {
+        if (userUpdateRequest == null || userUpdateRequest.getUserId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         User user = new User();

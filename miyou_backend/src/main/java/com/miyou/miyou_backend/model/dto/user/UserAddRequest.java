@@ -18,7 +18,7 @@ public class UserAddRequest implements Serializable {
     private String userName;
 
     /**
-     * 账号
+     * 用户账号
      */
     private String userAccount;
 
@@ -28,7 +28,7 @@ public class UserAddRequest implements Serializable {
     private String userAvatar;
 
     /**
-     * 性别
+     * 用户性别
      */
     private Integer userGender;
 
@@ -38,7 +38,7 @@ public class UserAddRequest implements Serializable {
     private String userRole;
 
     /**
-     * 密码
+     * 用户密码
      */
     private String userPassword;
 

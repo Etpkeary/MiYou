@@ -11,6 +11,7 @@ import java.util.Date;
 /**
  * 用户视图
  *
+ * @author LINGLAN
  * @TableName user
  */
 @Data
