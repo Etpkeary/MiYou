@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -57,6 +58,12 @@ public class UserVO implements Serializable {
      */
     @TableField(value = "userPhone")
     private String userPhone;
+
+    /**
+     * 用户简介
+     */
+    @TableField(value = "userProfile")
+    private String userProfile;
 
     /**
      * 用户邮箱

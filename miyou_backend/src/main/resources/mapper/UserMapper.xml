@@ -16,6 +16,7 @@
             <result property="userEmail" column="userEmail" jdbcType="VARCHAR"/>
             <result property="userStatus" column="userStatus" jdbcType="VARCHAR"/>
             <result property="userPassword" column="userPassword" jdbcType="VARCHAR"/>
+            <result property="userProfile" column="userProfile" jdbcType="VARCHAR"/>
             <result property="userCreateTime" column="userCreateTime" jdbcType="TIMESTAMP"/>
             <result property="userUpdateTime" column="userUpdateTime" jdbcType="TIMESTAMP"/>
             <result property="userIsDelete" column="userIsDelete" jdbcType="TINYINT"/>
@@ -25,7 +26,8 @@
         userId,MiYouCode,userName,
         userAccount,userAvatar,userGender,
         userRole,userPhone,userEmail,
-        userStatus,userPassword,userCreateTime,
-        userUpdateTime,userIsDelete
+        userStatus,userPassword,userProfile,
+        userCreateTime,userUpdateTime,
+        userIsDelete
     </sql>
 </mapper>

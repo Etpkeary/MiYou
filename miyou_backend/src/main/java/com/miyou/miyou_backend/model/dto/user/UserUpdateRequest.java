@@ -49,6 +49,11 @@ public class UserUpdateRequest implements Serializable {
     private String userPassword;
 
     /**
+     * 用户简介
+     */
+    private String userProfile;
+
+    /**
      * 用户是否删除 0 - 未删除 1 - 删除(软删除)
      */
     private Integer userIsDelete;

@@ -2,6 +2,7 @@ package com.miyou.miyou_backend.model.dto.user;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
@@ -44,10 +45,11 @@ public class UserUpdateMyRequest implements Serializable {
     @TableField(value = "userEmail")
     private String userEmail;
 
-//    /**
-//     * 简介
-//     */
-//    private String userProfile;
+    /**
+     * 用户简介
+     */
+    @TableField(value = "userProfile")
+    private String userProfile;
 
     private static final long serialVersionUID = 1L;
 }

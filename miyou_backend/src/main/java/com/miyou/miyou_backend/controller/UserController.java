@@ -229,7 +229,7 @@ public class UserController {
      * @return 用户信息脱敏的列表
      */
     @GetMapping("/list")
-    public BaseResponse<List<UserVO>> listUser(UserQueryRequest userQueryRequest, HttpServletRequest request) {
+    public BaseResponse<List<UserVO>> getListUser(UserQueryRequest userQueryRequest, HttpServletRequest request) {
         User userQuery = new User();
         if (userQueryRequest != null) {
             BeanUtils.copyProperties(userQueryRequest, userQuery);
@@ -275,4 +275,11 @@ public class UserController {
     }
 
     // endregion
+
+    // region Exel上传下载
+
+
+
+    // endregion
+
 }

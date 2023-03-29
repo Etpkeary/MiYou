@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -82,6 +83,12 @@ public class User implements Serializable {
      */
     @TableField(value = "userPassword")
     private String userPassword;
+
+    /**
+     * 用户简介
+     */
+    @TableField(value = "userProfile")
+    private String userProfile;
 
     /**
      * 创建时间
